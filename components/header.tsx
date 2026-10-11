@@ -143,6 +143,7 @@ export function Header() {
             </div>
 
             <button
+              type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card/50 xl:hidden transition-colors hover:bg-secondary"
               aria-label={t("Toggle menu", "فتح أو إغلاق القائمة")}
@@ -179,7 +180,7 @@ export function Header() {
           hidden={!isMobileMenuOpen}
           onKeyDown={(event) => { if (event.key === "Escape") { setIsMobileMenuOpen(false); document.querySelector<HTMLButtonElement>('[aria-controls="mobile-menu"]')?.focus() } }}
           className={cn(
-            " transition-all duration-400 xl:hidden bg-background",
+            "overflow-hidden transition-all duration-400 xl:hidden bg-background/95 backdrop-blur-xl",
             isMobileMenuOpen ? "max-h-96 opacity-100 pt-4" : "max-h-0 opacity-0",
           )}
         >
