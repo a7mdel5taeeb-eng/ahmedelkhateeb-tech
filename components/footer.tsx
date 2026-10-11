@@ -1,13 +1,16 @@
-import { Github, Twitter, Linkedin, Mail, ExternalLink, Heart } from "lucide-react"
+"use client"
 
-const socialLinks = [
-  { label: "GitHub", href: "https://github.com/ehsanghaffar", handle: "@ehsanghaffar", icon: Github },
-  { label: "Twitter", href: "https://twitter.com/ehsanghaffar", handle: "@ehsanghaffar", icon: Twitter },
-  { label: "LinkedIn", href: "https://linkedin.com/in/ehsanghaffar", handle: "/in/ehsanghaffar", icon: Linkedin },
-  { label: "Email", href: "mailto:hello@ehsanghaffar.dev", handle: "hello@ehsanghaffar.dev", icon: Mail },
-]
+import { Github, MessageCircle, Phone, Mail, ExternalLink, Heart } from "lucide-react"
+import { useLanguage } from "./language-provider"
 
 export function Footer() {
+  const { t } = useLanguage()
+  const socialLinks = [
+    { label: "GitHub", href: "https://github.com/a7mdel5taeeb-eng", handle: "@a7mdel5taeeb-eng", icon: Github },
+    { label: t("WhatsApp", "واتساب"), href: "https://wa.me/966564227074", handle: "+966 56 422 7074", icon: MessageCircle },
+    { label: t("Phone", "الهاتف"), href: "tel:+966564227074", handle: "+966 56 422 7074", icon: Phone },
+    { label: t("Email", "البريد"), href: "mailto:a7mdel5taeeb@gmail.com", handle: "a7mdel5taeeb@gmail.com", icon: Mail },
+  ]
   return (
     <footer id="connect" className="border-t border-border/30 px-4 sm:px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl">
@@ -15,23 +18,22 @@ export function Footer() {
           {/* Left column */}
           <div className="space-y-6 sm:space-y-8 animate-fade-in-up">
             <div className="space-y-3">
-              <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">Connect</p>
+              <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">{t("Connect", "تواصل معي")}</p>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-balance">
-                {"Let's build something "}
-                <span className="bg-gradient-to-l from-primary/50 to-accent text-transparent bg-clip-text ">together</span>
+                {t("Let's build something ", "لنبنِ شيئاً ")}
+                <span className="text-primary">{t("together", "معاً")}</span>
               </h2>
             </div>
             <p className="max-w-md text-base sm:text-lg text-muted-foreground leading-relaxed">
-              Always interested in collaborations, interesting problems, and conversations about code, design, and
-              everything in between.
+              {t("Have an idea, a technical challenge, or a learning opportunity? Let's talk about software, education, and solutions that work. Based in Saudi Arabia.", "لديك فكرة أو تحدٍ تقني أو فرصة تعليمية؟ لنتحدث عن البرمجيات والتعليم والحلول العملية. مقيم في المملكة العربية السعودية.")}
             </p>
 
             <div className="pt-2">
               <a
-                href="mailto:hello@ehsanghaffar.dev"
+                href="mailto:a7mdel5taeeb@gmail.com"
                 className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-xl border border-primary bg-primary/10 px-8 py-4 sm:py-4 font-mono text-sm text-primary transition-all duration-500 hover:text-primary-foreground active:scale-[0.98] w-full sm:w-auto"
               >
-                <span className="relative z-10">send a signal</span>
+                <span className="relative z-10">{t("send a signal", "أرسل رسالة")}</span>
                 <span className="relative z-10 transition-transform duration-300 group-hover:translate-x-1">→</span>
                 <span className="absolute inset-0 -translate-x-full bg-primary transition-transform duration-500 group-hover:translate-x-0" />
               </a>
@@ -39,17 +41,17 @@ export function Footer() {
           </div>
 
           {/* Right column - Links */}
-          <div className="space-y-6 lg:text-right animate-fade-in-up stagger-2">
+          <div className="space-y-6 lg:text-end animate-fade-in-up stagger-2">
             <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-muted-foreground">
-              Find me elsewhere
+              {t("Find me elsewhere", "قنوات التواصل")}
             </p>
             <div className="space-y-2">
               {socialLinks.map((link, index) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  target={link.label !== "Email" ? "_blank" : undefined}
-                  rel={link.label !== "Email" ? "noopener noreferrer" : undefined}
+                  target={link.href.startsWith("https:") ? "_blank" : undefined}
+                  rel={link.href.startsWith("https:") ? "noopener noreferrer" : undefined}
                   className="group flex items-center justify-between gap-4 rounded-xl border border-transparent p-4 transition-all duration-300 lg:flex-row-reverse active:bg-secondary/30 hover:border-border/50 hover:bg-card/50 glass animate-fade-in"
                   style={{ animationDelay: `${index * 100 + 400}ms` }}
                 >
@@ -58,11 +60,11 @@ export function Footer() {
                     <span className="font-mono text-sm font-medium transition-colors group-hover:text-gradient">
                       {link.label}
                     </span>
-                    {link.label !== "Email" && (
+                    {link.href.startsWith("https:") && (
                       <ExternalLink className="h-3 w-3 text-muted-foreground/50 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-1" />
                     )}
                   </div>
-                  <span className="font-mono text-xs text-muted-foreground truncate">{link.handle}</span>
+                  <span dir="ltr" className="font-mono text-xs text-muted-foreground break-all">{link.handle}</span>
                 </a>
               ))}
             </div>
@@ -75,9 +77,9 @@ export function Footer() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
             </span>
-            <span>Forged with</span>
+            <span>{t("Forged with", "صُنع بـ")}</span>
             <Heart className="h-3.5 w-3.5 text-destructive animate-pulse" />
-            <span>& code</span>
+            <span>{t("& code", "والكود")}</span>
           </div>
 
           <div className="flex items-center gap-4">
@@ -96,7 +98,7 @@ export function Footer() {
           </div>
 
           <p className="font-mono text-xs text-muted-foreground text-center sm:text-right">
-            © {new Date().getFullYear()} EINCODE — All experiments reserved
+            © {new Date().getFullYear()} {t("Ahmed Elkhateeb — Digital Lab", "أحمد الخطيب — المختبر الرقمي")}
           </p>
         </div>
       </div>

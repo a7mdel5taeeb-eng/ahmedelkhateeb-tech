@@ -1,142 +1,43 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState } from "react"
 import { cn } from "@/lib/utils"
-import { Github, Star, GitFork, ExternalLink, Sparkles } from "lucide-react"
+import { Github, Sparkles } from "lucide-react"
 
-const projects = [
-  {
-    id: 0,
-    title: "EinUI",
-    description:
-      "A collection of beautiful, ready-made Liquid Glass UI components you can preview, copy, and drop into any web app. Built on Tailwind, shadcn/ui, and Radix UI primitives.",
-    tags: ["TypeScript", "Next.js 16", "shadcn", "Radix UI", "Tailwind"],
-    status: "in-progress",
-    year: "2025",
-    stars: 34,
-    forks: 1,
-    url: "https://github.com/ehsanghaffar/einui",
-    homepage: "https://ui.eindev.ir",
-    featured: true,
-    highlight: true,
-  },
-  {
-    id: 1,
-    title: "EinBioGPT",
-    description:
-      "An intelligent web application built with Next.js, Tailwind CSS, and OpenAI's GPT models. Generates engaging and personalized bios for social media platforms.",
-    tags: ["TypeScript", "Next.js", "GPT", "LangChain"],
-    status: "shipped",
-    year: "2023",
-    stars: 17,
-    forks: 8,
-    url: "https://github.com/ehsanghaffar/einbiogpt",
-    homepage: "https://bio.eindev.ir/",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "JavaScript Playground",
-    description:
-      "A collection of JavaScript code snippets, algorithms, and mini-projects for learning and reference purposes.",
-    tags: ["JavaScript", "Algorithms", "Snippets"],
-    status: "shipped",
-    year: "2020",
-    stars: 19,
-    forks: 5,
-    url: "https://github.com/ehsanghaffar/javascript-playground",
-    featured: false,
-  },
-  {
-    id: 3,
-    title: "Next.js 16 Docker Starter",
-    description:
-      "A batteries-included starter for building Next.js 16.1.0 apps with App Router, PNPM, Tailwind v4+, Next-Auth v5, and multi-stage Docker setup.",
-    tags: ["Next.js 16.1.0", "Docker", "Tailwind v4"],
-    status: "in-progress",
-    year: "2025",
-    stars: 9,
-    forks: 4,
-    url: "https://github.com/ehsanghaffar/next16-docker-tw4-starter",
-    homepage: "https://nextjs-16-docker.vercel.app",
-    featured: true,
-  },
-  {
-    id: 4,
-    title: "Awesome Clubhouses",
-    description:
-      "Curated list of resources for Clubhouse, the voice-based social network where people come together to talk, listen and learn.",
-    tags: ["Python", "Awesome List", "Social"],
-    status: "archived",
-    year: "2022",
-    stars: 41,
-    forks: 8,
-    url: "https://github.com/ehsanghaffar/awesome-clubhouse",
-    homepage: "https://ehsanghaffar.github.io/awesome-clubhouse/",
-    featured: false,
-  },
-  {
-    id: 5,
-    title: "LLM Practice",
-    description:
-      "A self-hosted personal chatbot API with FastAPI. Interact with Llama2 and other open-source LLMs for natural language conversations.",
-    tags: ["Python", "FastAPI", "Llama2", "MCP"],
-    status: "shipped",
-    year: "2023",
-    stars: 13,
-    forks: 3,
-    url: "https://github.com/ehsanghaffar/llm-practice",
-    featured: false,
-  },
-  {
-    id: 6,
-    title: "Hand-Build Linux",
-    description:
-      "A minimal, customizable Linux distribution built from scratch using the Linux kernel, BusyBox, and Syslinux bootloader.",
-    tags: ["Shell", "Linux", "Docker"],
-    status: "in-progress",
-    year: "2025",
-    stars: 8,
-    forks: 1,
-    url: "https://github.com/ehsanghaffar/handbuilt-linux",
-    featured: true,
-  },
-  {
-    id: 7,
-    title: "Next.js AppDir Template",
-    description:
-      "An all-inclusive Next.js web application template showcasing seamless integration of Next.js, Docker, MongoDB, and Tailwind CSS.",
-    tags: ["TypeScript", "Next.js", "Docker", "MongoDB"],
-    status: "shipped",
-    year: "2023",
-    stars: 19,
-    forks: 6,
-    url: "https://github.com/ehsanghaffar/nextjs-appdir-docker",
-    featured: false,
-  },
+import { useLanguage } from "./language-provider"
+
+const focusAreas = [
+  { id: 0, title: ["Software & Web Solutions", "حلول البرمجيات والويب"], description: ["Software development and thoughtful web design — turning practical needs into clear, usable digital experiences.", "تطوير البرمجيات وتصميم الويب بعناية — تحويل الاحتياجات العملية إلى تجارب رقمية واضحة وسهلة الاستخدام."], tags: [["Software Development", "تطوير البرمجيات"], ["Web Design", "تصميم الويب"]], category: "software", highlight: true },
+  { id: 1, title: ["AI Education Lab", "مختبر تعليم الذكاء الاصطناعي"], description: ["Exploring accessible ways to teach AI concepts, build understanding, and encourage responsible experimentation.", "استكشاف أساليب مبسطة لتعليم مفاهيم الذكاء الاصطناعي وبناء الفهم وتشجيع التجارب المسؤولة."], tags: [["AI Education", "تعليم الذكاء الاصطناعي"], ["Exploration", "استكشاف"]], category: "education", highlight: false },
+  { id: 2, title: ["Digital Learning Experiences", "تجارب التعلم الرقمي"], description: ["Computer and programming teaching that connects technical concepts with hands-on learning.", "تعليم الحاسب والبرمجة بأسلوب يربط المفاهيم التقنية بالتعلم العملي."], tags: [["ICT Teaching", "تعليم تقنية المعلومات"], ["Programming", "البرمجة"]], category: "education", highlight: false },
+  { id: 3, title: ["IT Systems & Networking", "أنظمة تقنية المعلومات والشبكات"], description: ["Technical support, computer maintenance, networking solutions, and technology sales and consultation.", "الدعم الفني وصيانة الحاسب وحلول الشبكات ومبيعات التقنية والاستشارات."], tags: [["IT Support", "الدعم الفني"], ["Networking", "الشبكات"], ["Consultation", "الاستشارات"]], category: "systems", highlight: true },
 ]
 
-const filters = ["all", "shipped", "in-progress", "archived"]
+const filters = [["all", "all", "الكل"], ["software", "software", "البرمجيات"], ["education", "education", "التعليم"], ["systems", "systems", "الأنظمة"]]
 
 export function ProjectsGrid() {
+  const { t } = useLanguage()
+  const projects = focusAreas.map(p => ({ ...p, title: t(p.title[0], p.title[1]), description: t(p.description[0], p.description[1]), tags: p.tags.map(tag => t(tag[0], tag[1])), status: t("selected focus", "مجال تركيز"), year: `0${p.id + 1}`, featured: false }))
   const [activeFilter, setActiveFilter] = useState("all")
 
-  const filteredProjects = activeFilter === "all" ? projects : projects.filter((p) => p.status === activeFilter)
+  const filteredProjects = activeFilter === "all" ? projects : projects.filter((p) => p.category === activeFilter)
 
   return (
     <section id="projects" className="px-4 sm:px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 sm:mb-14 flex flex-col gap-6 sm:gap-8 sm:flex-row sm:items-end sm:justify-between">
           <div className="space-y-3 animate-fade-in-up">
-            <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">Artifacts</p>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">Open Source Projects</h2>
+            <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">{t("Artifacts / areas of exploration", "المختبر / مجالات الاستكشاف")}</p>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">{t("Selected Focus", "مجالات التركيز")}</h2>
+            <p className="max-w-xl text-sm text-muted-foreground">{t("Areas I work in and explore — not completed client projects. Specific project case studies will be added when available.", "مجالات أعمل بها وأستكشفها، وليست مشاريع عملاء مكتملة. ستُضاف دراسات المشاريع عند توفرها.")}</p>
           </div>
 
           <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:overflow-visible sm:flex-wrap scrollbar-hide animate-fade-in-up stagger-2">
-            {filters.map((filter) => (
+            {filters.map(([filter, en, ar]) => (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
+                aria-pressed={activeFilter === filter}
                 className={cn(
                   "shrink-0 rounded-lg border px-5 py-2.5 font-mono text-xs uppercase tracking-wider transition-all duration-300 active:scale-[0.98]",
                   activeFilter === filter
@@ -144,7 +45,7 @@ export function ProjectsGrid() {
                     : "border-border text-muted-foreground hover:border-foreground/50 hover:text-foreground hover:bg-secondary/50",
                 )}
               >
-                {filter}
+                {t(en, ar)}
               </button>
             ))}
           </div>
@@ -164,10 +65,10 @@ export function ProjectsGrid() {
               style={{ animationDelay: `${(index % 6) * 100 + 200}ms` }}
             >
               {"highlight" in project && project.highlight && (
-                <div className="absolute left-5 top-5 flex items-center gap-2 rounded-full border border-primary/40 bg-primary/15 px-3.5 py-1.5 animate-pulse-glow">
+                <div className="absolute start-5 top-5 flex items-center gap-2 rounded-full border border-primary/40 bg-primary/15 px-3.5 py-1.5 animate-pulse-glow">
                   <Sparkles className="h-3.5 w-3.5 text-primary" />
                   <span className="font-mono text-[10px] uppercase tracking-wider text-primary font-medium">
-                    Featured
+                    {t("Focus", "تركيز")}
                   </span>
                 </div>
               )}
@@ -175,16 +76,14 @@ export function ProjectsGrid() {
               {/* Status indicator */}
               <div
                 className={cn(
-                  "absolute right-5 top-5 flex items-center gap-2.5",
+                  "absolute end-5 top-5 flex items-center gap-2.5",
                   "highlight" in project && project.highlight && "top-5",
                 )}
               >
                 <span
                   className={cn(
                     "h-2.5 w-2.5 rounded-full transition-shadow duration-300",
-                    project.status === "shipped" && "bg-primary shadow-sm shadow-primary/50",
-                    project.status === "in-progress" && "bg-yellow-500 animate-pulse shadow-sm shadow-yellow-500/50",
-                    project.status === "archived" && "bg-muted-foreground",
+                    "bg-primary",
                   )}
                 />
                 <span className="font-mono text-xs text-muted-foreground">{project.status}</span>
@@ -217,16 +116,6 @@ export function ProjectsGrid() {
                 {project.description}
               </p>
 
-              <div className="mb-5 flex items-center gap-5 font-mono text-xs text-muted-foreground">
-                <span className="flex items-center gap-1.5 transition-colors group-hover:text-yellow-500">
-                  <Star className="h-3.5 w-3.5" />
-                  {project.stars}
-                </span>
-                <span className="flex items-center gap-1.5 transition-colors group-hover:text-foreground">
-                  <GitFork className="h-3.5 w-3.5" />
-                  {project.forks}
-                </span>
-              </div>
 
               <div className="mb-5 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
@@ -241,27 +130,16 @@ export function ProjectsGrid() {
 
               <div className="flex items-center gap-4">
                 <a
-                  href={project.url}
+                  href="https://github.com/a7mdel5taeeb-eng"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 font-mono text-xs text-muted-foreground hover:text-primary transition-all duration-300 group/link"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Github className="h-4 w-4 transition-transform group-hover/link:scale-110" />
-                  <span className="underline-animate">source</span>
+                  <span className="underline-animate">{t("GitHub profile", "حساب GitHub")}</span>
                 </a>
-                {project.homepage && (
-                  <a
-                    href={project.homepage}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 font-mono text-xs text-primary hover:text-foreground transition-all duration-300 group/link"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <ExternalLink className="h-4 w-4 transition-transform group-hover/link:scale-110 group-hover/link:rotate-12" />
-                    <span className="underline-animate">live</span>
-                  </a>
-                )}
+                <a href="#connect" className="font-mono text-xs text-primary underline-animate">{t("discuss an idea", "ناقش فكرة")}</a>
               </div>
 
               <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-primary via-primary/80 to-transparent transition-all duration-500 group-hover:w-full" />

@@ -5,11 +5,8 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      { source: '/projects', destination: '/#work', permanent: true },
-      { source: '/introduction', destination: '/#about', permanent: true },
-      { source: '/workbench', destination: '/#skills', permanent: true },
-      { source: '/notes', destination: '/#education', permanent: true },
-      { source: '/blog/:path*', destination: '/#education', permanent: true },
+      { source: '/introduction', destination: '/#about', permanent: false },
+      { source: '/blog/:path*', destination: '/notes', permanent: false },
     ]
   },
   async headers() {

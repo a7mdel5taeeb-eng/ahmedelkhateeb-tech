@@ -3,26 +3,25 @@
 import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { Github, Twitter, Linkedin } from "lucide-react"
+import { Github, MessageCircle, Mail, Zap } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
-import { ThemeChanger } from "./theme-changer"
+import { LanguageSwitch, useLanguage } from "./language-provider"
 import Link from "next/link"
 
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
-  // { label: "Notes", href: "/notes" },/
-  { label: "Workbench", href: "/workbench" },
-  { label: "Blog", href: "/blog" },
-]
-
 const socialLinks = [
-  { label: "GitHub", href: "https://github.com/ehsanghaffar", icon: Github },
-  { label: "Twitter", href: "https://twitter.com/ehsanghaffar", icon: Twitter },
-  { label: "LinkedIn", href: "https://linkedin.com/in/ehsanghaffar", icon: Linkedin },
+  { label: "GitHub", href: "https://github.com/a7mdel5taeeb-eng", icon: Github },
+  { label: "WhatsApp", href: "https://wa.me/966564227074", icon: MessageCircle },
+  { label: "Email", href: "mailto:a7mdel5taeeb@gmail.com", icon: Mail },
 ]
 
 export function Header() {
+  const { t, ready } = useLanguage()
+  const navItems = [
+    { label: t("Home", "الرئيسية"), href: "/" },
+    { label: t("Projects", "المجالات"), href: "/projects" },
+    { label: t("Workbench", "منضدة العمل"), href: "/workbench" },
+    { label: t("Lab Notes", "ملاحظات المختبر"), href: "/notes" },
+  ]
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -43,27 +42,29 @@ export function Header() {
 
   return (
     <header
+      data-ready={ready}
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
         isScrolled ? "border-b border-border/50 bg-background/80 backdrop-blur-xl shadow-sm" : "bg-transparent",
       )}
     >
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:start-2 focus:bg-background focus:p-3">{t("Skip to content", "انتقل إلى المحتوى")}</a>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-4">
         <nav className="flex items-center justify-between">
           <Link href="/" className="group flex items-center gap-3">
             <div className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-primary/50 bg-primary/10 font-mono text-sm text-primary transition-all duration-400 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-primary/25">
-              <span className="glitch">{"⚡"}</span>
+              <Zap className="size-4 glitch" aria-hidden="true" />
             </div>
             <span className="font-mono text-sm tracking-tight">
-              EIN
+              {t("AHMED", "أحمد")}
               <span className="bg-gradient-to-l from-primary/50 to-accent bg-clip-text text-transparent font-semibold">
-                CODE
+                {t(".LAB", ".مختبر")}
               </span>
             </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden items-center gap-1 md:flex">
+          <div className="hidden items-center gap-1 xl:flex">
             {navItems.map((item, index) => (
               <Link
                 key={item.label}
@@ -80,7 +81,7 @@ export function Header() {
               >
                 <span
                   className={cn(
-                    "absolute left-1.5 text-primary transition-all duration-200",
+                    "absolute start-1.5 text-primary transition-all duration-200",
                     isActive(item.href)
                       ? "opacity-100 translate-x-0"
                       : hoveredIndex === index
@@ -107,7 +108,7 @@ export function Header() {
               </Link>
             ))}
             <div className="ml-2 flex items-center gap-1">
-              <ThemeChanger />
+              <LanguageSwitch />
               <ThemeToggle />
             </div>
           </div>
@@ -138,13 +139,15 @@ export function Header() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
-              <span>status: building</span>
+              <span>{t("status: exploring", "الحالة: استكشاف")}</span>
             </div>
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card/50 md:hidden transition-colors hover:bg-secondary"
-              aria-label="Toggle menu"
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card/50 xl:hidden transition-colors hover:bg-secondary"
+              aria-label={t("Toggle menu", "فتح أو إغلاق القائمة")}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               <div className="flex flex-col gap-1.5 w-5">
                 <span
@@ -172,8 +175,11 @@ export function Header() {
 
         {/* Mobile Menu */}
         <div
+          id="mobile-menu"
+          hidden={!isMobileMenuOpen}
+          onKeyDown={(event) => { if (event.key === "Escape") { setIsMobileMenuOpen(false); document.querySelector<HTMLButtonElement>('[aria-controls="mobile-menu"]')?.focus() } }}
           className={cn(
-            " transition-all duration-400 md:hidden bg-background",
+            " transition-all duration-400 xl:hidden bg-background",
             isMobileMenuOpen ? "max-h-96 opacity-100 pt-4" : "max-h-0 opacity-0",
           )}
         >
@@ -204,8 +210,8 @@ export function Header() {
                   <link.icon className="h-4 w-4" />
                 </a>
               ))}
-              <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-border/50">
-                <ThemeChanger />
+              <div className="flex h-11 items-center justify-center rounded-lg border border-border/50">
+                <LanguageSwitch />
               </div>
               <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-border/50">
                 <ThemeToggle />
@@ -217,7 +223,7 @@ export function Header() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
-              <span>status: building</span>
+              <span>{t("status: exploring", "الحالة: استكشاف")}</span>
             </div>
           </div>
         </div>

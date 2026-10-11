@@ -25,6 +25,7 @@ export function CursorGlow() {
       setIsHovering(!!isInteractive)
     }
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)").matches) return
     window.addEventListener("mousemove", handleMouseMove, { passive: true })
     document.body.addEventListener("mouseleave", handleMouseLeave)
     document.addEventListener("mouseover", handleMouseOver, { passive: true })

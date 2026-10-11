@@ -4,9 +4,11 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Sun, Moon, Monitor } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "./language-provider";
 
 export function ThemeToggle() {
   const { theme, setTheme, resolvedTheme } = useTheme();
+  const { t } = useLanguage();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -53,11 +55,11 @@ export function ThemeToggle() {
         "group relative flex size-8 items-center justify-center rounded",
         "text-muted-foreground transition-all duration-200 hover:text-primary"
       )}
-      aria-label={`Switch to ${nextTheme.label} theme`}
+      aria-label={t(`Switch to ${nextTheme.label} theme`, nextTheme.value === "light" ? "تفعيل المظهر الفاتح" : "تفعيل المظهر الداكن")}
     >
       <CurrentIcon className="size-4" />
       <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-card px-2 py-0.5 font-mono text-[10px] text-muted-foreground opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-        {resolvedTheme ?? currentTheme}
+        {t(resolvedTheme ?? currentTheme, resolvedTheme === "light" ? "فاتح" : "داكن")}
       </span>
     </button>
   );
