@@ -1,7 +1,7 @@
 {
-  "name": "EINCODE — Ehsan Ghaffar's Digital Laboratory",
-  "short_name": "EINCODE",
-  "description": "A digital workshop where code meets curiosity. Experiments, prototypes, and open-source artifacts by Ehsan Ghaffar.",
+  "name": "Ahmed Elkhateeb — Computer & Software Engineer",
+  "short_name": "Ahmed Elkhateeb",
+  "description": "Portfolio of Ahmed Elkhateeb, Computer & Software Engineer.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

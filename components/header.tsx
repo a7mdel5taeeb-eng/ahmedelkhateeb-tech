@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { Github, MessageCircle, Mail, Zap } from "lucide-react"
+import { Github, MessageCircle, Mail, Cpu } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
 import { LanguageSwitch, useLanguage } from "./language-provider"
 import Link from "next/link"
@@ -20,7 +20,7 @@ export function Header() {
     { label: t("Home", "الرئيسية"), href: "/" },
     { label: t("Projects", "المجالات"), href: "/projects" },
     { label: t("Workbench", "منضدة العمل"), href: "/workbench" },
-    { label: t("Lab Notes", "ملاحظات المختبر"), href: "/notes" },
+    { label: t("Professional Profile", "الملف المهني"), href: "/notes" },
   ]
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -44,8 +44,8 @@ export function Header() {
     <header
       data-ready={ready}
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        isScrolled ? "border-b border-border/50 bg-background/80 backdrop-blur-xl shadow-sm" : "bg-transparent",
+        "glass-nav fixed top-0 left-0 right-0 z-50 border-b border-border/35 transition-all duration-500",
+        isScrolled && "glass-nav-scrolled border-border/60",
       )}
     >
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:start-2 focus:bg-background focus:p-3">{t("Skip to content", "انتقل إلى المحتوى")}</a>
@@ -53,12 +53,12 @@ export function Header() {
         <nav className="flex items-center justify-between">
           <Link href="/" className="group flex items-center gap-3">
             <div className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-primary/50 bg-primary/10 font-mono text-sm text-primary transition-all duration-400 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-primary/25">
-              <Zap className="size-4 glitch" aria-hidden="true" />
+              <Cpu className="size-4 glitch" aria-hidden="true" />
             </div>
             <span className="font-mono text-sm tracking-tight">
-              {t("AHMED", "أحمد")}
+              {t("Ahmed ", "أحمد ")}
               <span className="bg-gradient-to-l from-primary/50 to-accent bg-clip-text text-transparent font-semibold">
-                {t(".LAB", ".مختبر")}
+                {t("Elkhateeb", "الخطيب")}
               </span>
             </span>
           </Link>

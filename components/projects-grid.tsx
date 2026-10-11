@@ -27,7 +27,7 @@ export function ProjectsGrid() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 sm:mb-14 flex flex-col gap-6 sm:gap-8 sm:flex-row sm:items-end sm:justify-between">
           <div className="space-y-3 animate-fade-in-up">
-            <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">{t("Artifacts / areas of exploration", "المختبر / مجالات الاستكشاف")}</p>
+            <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">{t("Expertise / areas of focus", "الخبرات / مجالات التركيز")}</p>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">{t("Selected Focus", "مجالات التركيز")}</h2>
             <p className="max-w-xl text-sm text-muted-foreground">{t("Areas I work in and explore — not completed client projects. Specific project case studies will be added when available.", "مجالات أعمل بها وأستكشفها، وليست مشاريع عملاء مكتملة. ستُضاف دراسات المشاريع عند توفرها.")}</p>
           </div>
@@ -56,7 +56,7 @@ export function ProjectsGrid() {
             <article
               key={project.id}
               className={cn(
-                "group relative overflow-hidden rounded-xl border bg-card/40 p-6 sm:p-7 glass transition-all duration-400 active:scale-[0.99] hover-lift hover:border-primary/40 hover:bg-card/70 animate-fade-in-up",
+                "group card-motion relative overflow-hidden rounded-xl border bg-card/40 p-6 sm:p-7 glass transition-all duration-400 active:scale-[0.99] hover-lift hover:border-primary/40 hover:bg-card/70 animate-fade-in-up",
                 "highlight" in project && project.highlight
                   ? "sm:col-span-2 lg:col-span-2 border-primary/30 bg-gradient-to-br from-primary/8 via-card/50 to-primary/8"
                   : "border-border/60",

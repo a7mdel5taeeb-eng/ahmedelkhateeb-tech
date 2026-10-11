@@ -12,12 +12,12 @@ export function generateBlogPostStructuredData(post: BlogPost, url: string) {
     author: {
       '@type': 'Person',
       name: post.author.name,
-      url: 'https://github.com/ehsanghaffar',
+      url: 'https://github.com/a7mdel5taeeb-eng',
     },
     publisher: {
       '@type': 'Person',
-      name: 'Ehsan Ghaffar',
-      url: 'https://eindev.ir',
+      name: 'Ahmed Elkhateeb',
+      url: 'https://github.com/a7mdel5taeeb-eng',
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -33,13 +33,13 @@ export function generateWebsiteStructuredData(url: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'EINCODE',
-    description: "A digital workshop where code meets curiosity. Experiments, prototypes, and open-source artifacts by Ehsan Ghaffar.",
+    name: 'Ahmed Elkhateeb',
+    description: 'Ahmed Elkhateeb — Computer & Software Engineer. Practical software, web, education, and IT solutions.',
     url: url,
     author: {
       '@type': 'Person',
-      name: 'Ehsan Ghaffar',
-      url: 'https://github.com/ehsanghaffar',
+      name: 'Ahmed Elkhateeb',
+      url: 'https://github.com/a7mdel5taeeb-eng',
     },
     potentialAction: {
       '@type': 'SearchAction',
@@ -56,18 +56,15 @@ export function generatePersonStructuredData() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: 'Ehsan Ghaffar',
-    url: 'https://eindev.ir',
-    image: 'https://eindev.ir/developer-portrait.png',
+    name: 'Ahmed Elkhateeb',
+    url: 'https://github.com/a7mdel5taeeb-eng',
     sameAs: [
-      'https://github.com/ehsanghaffar',
-      'https://twitter.com/ehsanghaffar',
-      'https://linkedin.com/in/ehsanghaffar',
+      'https://github.com/a7mdel5taeeb-eng',
     ],
-    jobTitle: 'Software Engineer',
+    jobTitle: 'Computer & Software Engineer',
     worksFor: {
       '@type': 'Organization',
-      name: 'EINCODE',
+      name: 'Dunia Al-Ajial International Schools',
     },
   }
 }

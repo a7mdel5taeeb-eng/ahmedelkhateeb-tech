@@ -9,7 +9,7 @@ import { useLanguage } from "./language-provider"
 export function LabNotes() {
   const { t } = useLanguage()
   const notes = [
-    { id: 1, title: t("Bachelor of Social Work", "بكالوريوس الخدمة الاجتماعية"), excerpt: t("Education grounded in understanding people.", "تعليم يرتكز على فهم الإنسان."), detail: t("Bachelor of Social Work — graduated in 2010.", "بكالوريوس الخدمة الاجتماعية — تخرج عام 2010."), date: "2010", category: t("education", "التعليم"), color: "from-primary/10 to-transparent" },
+    { id: 1, title: t("IT Systems & Technical Support", "أنظمة تقنية المعلومات والدعم الفني"), excerpt: t("Hands-on expertise in keeping devices, systems, and people productive.", "خبرة عملية في إبقاء الأجهزة والأنظمة والمستخدمين في أفضل إنتاجية."), detail: t("Practical work across Windows environments, hardware maintenance, local networks, troubleshooting, and user support.", "عمل عملي في بيئات Windows وصيانة الأجهزة والشبكات المحلية وحل المشكلات ودعم المستخدمين."), date: "", category: t("professional focus", "مجال مهني"), color: "from-primary/10 to-transparent" },
     { id: 2, title: "CCNA · IT Essentials · ICDL", excerpt: t("Technical credentials across networking and computer essentials.", "مؤهلات تقنية في الشبكات وأساسيات الحاسب."), detail: t("CCNA: networking. IT Essentials: computer hardware and software. ICDL: digital literacy.", "CCNA: الشبكات. IT Essentials: أجهزة الحاسب وبرمجياته. ICDL: المهارات الرقمية."), date: "", category: t("credentials", "الشهادات"), color: "from-primary/10 to-transparent" },
     { id: 3, title: t("Arabic & English", "العربية والإنجليزية"), excerpt: t("Connecting through teaching and clear communication.", "تواصل فعال من خلال التعليم والشرح الواضح."), detail: t("Arabic: Native. English: Excellent.", "العربية: اللغة الأم. الإنجليزية: ممتاز."), date: "", category: t("languages", "اللغات"), color: "from-primary/10 to-transparent" },
     { id: 4, title: t("Technology, made practical", "تقنية قابلة للتطبيق"), excerpt: t("From software and web design to education and IT support.", "من البرمجيات وتصميم الويب إلى التعليم والدعم التقني."), detail: t("Professional focus: software development, web design and development, AI education, computer and programming teaching, technical support, computer maintenance, networking solutions, and technology sales and consultation.", "مجالات العمل: تطوير البرمجيات وتصميم وتطوير الويب وتعليم الذكاء الاصطناعي وتدريس الحاسب والبرمجة والدعم الفني وصيانة الحاسب وحلول الشبكات ومبيعات التقنية والاستشارات."), date: "", category: t("approach", "المنهج"), color: "from-primary/10 to-transparent" },
@@ -20,8 +20,8 @@ export function LabNotes() {
     <section id="notes" className="px-4 sm:px-6 py-20 sm:py-28 border-t border-border/30">
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 sm:mb-14 space-y-3 animate-fade-in-up">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">{t("Field Notes / background", "ملاحظات / الخلفية العلمية")}</p>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">{t("Lab Notes", "ملاحظات المختبر")}</h2>
+          <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">{t("Credentials / background", "المؤهلات / الخلفية المهنية")}</p>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">{t("Professional Profile", "الملف المهني")}</h2>
           <p className="max-w-2xl text-base sm:text-lg text-muted-foreground leading-relaxed">
             {t("The foundations behind the work: education, credentials, languages, and a practical approach to technology.", "الأسس التي يرتكز عليها العمل: التعليم والشهادات واللغات ونهج عملي في التعامل مع التقنية.")}
           </p>
@@ -32,7 +32,7 @@ export function LabNotes() {
             <article
               key={note.id}
               className={cn(
-                "group relative overflow-hidden rounded-xl border border-border bg-card/40 glass p-6 sm:p-7 transition-all duration-400 hover:border-primary/40 hover:bg-card/60 active:scale-[0.99] hover-lift animate-fade-in-up",
+                "group card-motion relative overflow-hidden rounded-xl border border-border bg-card/40 glass p-6 sm:p-7 transition-all duration-400 hover:border-primary/40 hover:bg-card/60 active:scale-[0.99] hover-lift animate-fade-in-up",
                 expandedNote === note.id && "border-primary/50 bg-card/70",
               )}
               style={{ animationDelay: `${index * 100 + 200}ms` }}

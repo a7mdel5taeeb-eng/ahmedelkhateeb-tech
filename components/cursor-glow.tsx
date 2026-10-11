@@ -51,13 +51,13 @@ export function CursorGlow() {
         }}
       />
       <div
-        className="hidden lg:block pointer-events-none fixed w-8 h-8 rounded-full mix-blend-screen"
+        className="cursor-glow-dot hidden lg:block pointer-events-none fixed w-8 h-8 rounded-full mix-blend-screen"
         style={{
           left: position.x,
           top: position.y,
           transform: "translate(-50%, -50%)",
           background: "radial-gradient(circle, var(--primary) 0%, transparent 70%)",
-          opacity: isVisible ? 0.15 : 0,
+          opacity: isVisible ? 0.25 : 0,
           transition: "opacity 0.2s ease",
           filter: "blur(4px)",
         }}

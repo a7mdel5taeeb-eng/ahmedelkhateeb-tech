@@ -37,7 +37,7 @@ export function HeroSection() {
           <div className="space-y-8 sm:space-y-10">
             <div className="space-y-3 animate-fade-in-up">
               <p className="font-mono text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-primary">
-                {t("Ahmed Elkhateeb — Digital Lab", "أحمد الخطيب — المختبر الرقمي")}
+                {t("Ahmed Elkhateeb — Computer & Software Engineer", "أحمد الخطيب — مهندس حاسب وبرمجيات")}
               </p>
               <h1 aria-label={t("Turning Ideas Into Real Solutions", "نحوّل الأفكار إلى حلول حقيقية")} className="text-4xl font-bold tracking-tight sm:text-4xl lg:text-5xl xl:text-6xl text-balance">
                 {t("Turning Ideas", "نحوّل الأفكار")}
@@ -52,7 +52,7 @@ export function HeroSection() {
 
             <p className="max-w-lg text-base sm:text-lg leading-relaxed text-muted-foreground animate-fade-in-up stagger-2">
               <span className="mb-3 block font-medium text-foreground">{t("Computer & Software Engineer", "مهندس حاسب وبرمجيات")}</span>
-              {t("Welcome to my digital workshop — a space for software, web experiences, AI education, and practical IT solutions. Based in Saudi Arabia, connecting technology, teaching, and curious minds. A laboratory for ideas that matter.", "مرحباً بك في ورشتي الرقمية — مساحة للبرمجيات وتجارب الويب وتعليم الذكاء الاصطناعي والحلول التقنية العملية. من المملكة العربية السعودية، أجمع بين التقنية والتعليم والعقول الفضولية. مختبر للأفكار التي تصنع فرقاً.")}
+              {t("I create practical software, web experiences, AI learning, and IT solutions. Based in Saudi Arabia, I connect technology, teaching, and real-world needs.", "أقدّم برمجيات وتجارب ويب عملية وتعليمًا للذكاء الاصطناعي وحلول تقنية معلومات. من المملكة العربية السعودية، أجمع بين التقنية والتعليم والاحتياجات الواقعية.")}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up stagger-3">
@@ -79,7 +79,7 @@ export function HeroSection() {
 
           {/* Right column - ASCII Art / Visual */}
           <div className="relative animate-scale-in stagger-4">
-            <div className="relative rounded-xl border border-border bg-card/60 glass p-5 sm:p-8 hover-lift">
+            <div className="terminal-boot relative rounded-xl border border-border bg-card/60 glass p-5 sm:p-8 hover-lift">
               {/* Terminal header dots */}
               <div className="absolute top-4 left-4 flex items-center gap-2">
                 <div className="h-3 w-3 rounded-full bg-destructive/60 transition-colors hover:bg-destructive" />
@@ -87,10 +87,10 @@ export function HeroSection() {
                 <div className="h-3 w-3 rounded-full bg-primary/60 transition-colors hover:bg-primary" />
               </div>
               <div className="absolute top-3.5 left-1/2 -translate-x-1/2 bg-background/50 rounded-md px-3 py-1 font-mono text-xs text-muted-foreground">
-                terminal://ahmed.lab
+                terminal://ahmed-elkhateeb
               </div>
 
-              <pre dir="ltr" aria-label={t("Digital lab terminal. Selected focus: software, education, IT systems.", "طرفية المختبر الرقمي. مجالات التركيز: البرمجيات والتعليم والأنظمة التقنية.")} className="mt-6 overflow-hidden font-mono text-[10px] leading-relaxed text-primary/80 sm:text-xs md:text-sm">
+              <pre dir="ltr" aria-label={t("Ahmed Elkhateeb portfolio. Selected focus: software, education, IT systems.", "ملف أحمد الخطيب المهني. مجالات التركيز: البرمجيات والتعليم والأنظمة التقنية.")} className="terminal-code mt-6 overflow-hidden font-mono text-[10px] leading-relaxed text-primary/80 sm:text-xs md:text-sm">
                 <span className="sm:hidden">{`┌───────────────────────┐
 │  ██████╗███████╗      │
 │ ██╔════╝██╔════╝      │
@@ -110,7 +110,7 @@ export function HeroSection() {
 │ ██║     ██║   ██║██║  ██║██╔══╝     │
 │ ╚██████╗╚██████╔╝██████╔╝███████╗   │
 │  ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝   │
-│          AHMED / DIGITAL LAB        │
+│       AHMED ELKHATEEB / TECH        │
 │                                     │
 │   > software / education / IT       │
 │   > status: exploring               │
@@ -118,6 +118,8 @@ export function HeroSection() {
 │                                     │
 └─────────────────────────────────────┘`}</span>
               </pre>
+              <span className="terminal-scanline" aria-hidden="true" />
+              <span className="terminal-online" aria-hidden="true">SYSTEM: ONLINE</span>
             </div>
 
             <div className="absolute -right-2 sm:-right-6 -top-2 sm:-top-6 rounded-lg border border-primary/40 bg-primary/15 glass px-3 sm:px-4 py-1.5 font-mono text-[11px] sm:text-xs text-primary animate-float">

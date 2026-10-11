@@ -1,6 +1,6 @@
 "use client"
 
-import { Github, MessageCircle, Phone, Mail, ExternalLink, Heart } from "lucide-react"
+import { Github, MessageCircle, Phone, Mail, ExternalLink } from "lucide-react"
 import { useLanguage } from "./language-provider"
 
 export function Footer() {
@@ -72,16 +72,6 @@ export function Footer() {
         </div>
 
         <div className="mt-16 sm:mt-20 flex flex-col items-center justify-between gap-6 border-t border-border/30 pt-8 sm:pt-10 sm:flex-row animate-fade-in stagger-4">
-          <div className="flex items-center gap-2.5 font-mono text-xs text-muted-foreground">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
-            </span>
-            <span>{t("Forged with", "صُنع بـ")}</span>
-            <Heart className="h-3.5 w-3.5 text-destructive animate-pulse" />
-            <span>{t("& code", "والكود")}</span>
-          </div>
-
           <div className="flex items-center gap-4">
             {socialLinks.slice(0, 3).map((link) => (
               <a
@@ -98,7 +88,7 @@ export function Footer() {
           </div>
 
           <p className="font-mono text-xs text-muted-foreground text-center sm:text-right">
-            © {new Date().getFullYear()} {t("Ahmed Elkhateeb — Digital Lab", "أحمد الخطيب — المختبر الرقمي")}
+            © {new Date().getFullYear()} {t("Ahmed Elkhateeb — Computer & Software Engineer", "أحمد الخطيب — مهندس كمبيوتر وبرمجيات")}
           </p>
         </div>
       </div>
