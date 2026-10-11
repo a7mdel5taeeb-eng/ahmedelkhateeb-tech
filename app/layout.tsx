@@ -1,107 +1,25 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
-import { ThemeProvider } from "@/components/theme-provider"
-import "./globals.css"
+import type React from 'react'
+import type { Metadata, Viewport } from 'next'
+import { Geist, Noto_Sans_Arabic } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
+import './globals.css'
 
-// Configure fonts with proper options
-const geist = Geist({
-  subsets: ["latin"],
-  variable: '--font-geist',
-  display: 'swap',
-})
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: '--font-geist-mono',
-  display: 'swap',
-})
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: '--font-space-grotesk',
-  display: 'swap',
-})
+const geist = Geist({ subsets: ['latin'], variable: '--font-geist', display: 'swap' })
+const arabic = Noto_Sans_Arabic({ subsets: ['arabic'], variable: '--font-arabic', display: 'swap' })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://eindev.ir'),
-  title: {
-    default: "EINCODE — Ehsan Ghaffar's Digital Laboratory",
-    template: "%s | EINCODE",
-  },
-  description:
-    "A digital workshop where code meets curiosity. Experiments, prototypes, and open-source artifacts by Ehsan Ghaffar.",
-  keywords: ["Software Engineering", "Web Development", "Next.js", "React", "TypeScript", "AI", "Machine Learning", "Systems Programming", "Code Experiments"],
-  authors: [{ name: "Ehsan Ghaffar", url: "https://github.com/ehsanghaffar" }],
-  creator: "Ehsan Ghaffar",
-  publisher: "Ehsan Ghaffar",
-  generator: "v0.app",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "/",
-    title: "EINCODE — Ehsan Ghaffar's Digital Laboratory",
-    description: "A digital workshop where code meets curiosity. Experiments, prototypes, and open-source artifacts by Ehsan Ghaffar.",
-    siteName: "EINCODE",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "EINCODE — Ehsan Ghaffar's Digital Laboratory",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "EINCODE — Ehsan Ghaffar's Digital Laboratory",
-    description: "A digital workshop where code meets curiosity. Experiments, prototypes, and open-source artifacts.",
-    creator: "@ehsanghaffar",
-    images: ["/og-image.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-    apple: "/apple-icon.png",
-  },
-  manifest: "/site.webmanifest",
+  title: { default: 'Ahmed Elkhateeb | Computer & Software Engineer', template: '%s | Ahmed Elkhateeb' },
+  description: 'Turning ideas into real solutions. Ahmed Elkhateeb — software development, web design, AI education, computer teaching, and IT solutions in Saudi Arabia. أحمد الخطيب — مهندس حاسب وبرمجيات.',
+  authors: [{ name: 'Ahmed Elkhateeb', url: 'https://github.com/a7mdel5taeeb-eng' }],
+  creator: 'Ahmed Elkhateeb',
+  keywords: ['Ahmed Elkhateeb', 'أحمد الخطيب', 'Software Engineer', 'Web Development', 'AI Education', 'IT Solutions', 'Saudi Arabia'],
+  openGraph: { type: 'website', locale: 'en_US', alternateLocale: ['ar_SA'], title: 'Ahmed Elkhateeb — Turning Ideas Into Real Solutions', description: 'Software engineering, digital experiences, and practical technology education.', siteName: 'Ahmed Elkhateeb' },
+  twitter: { card: 'summary', title: 'Ahmed Elkhateeb | Computer & Software Engineer', description: 'Turning Ideas Into Real Solutions' },
+  icons: { icon: '/portfolio-icon.svg' },
+  robots: { index: true, follow: true },
 }
+export const viewport: Viewport = { themeColor: '#06111F', width: 'device-width', initialScale: 1 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
-  return (
-    <html lang="en" suppressHydrationWarning className={`${geist.variable} ${geistMono.variable} ${spaceGrotesk.variable}`}>
-      <body className="font-sans antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true} storageKey="theme-mode">
-          {children}
-        </ThemeProvider>
-        <Analytics />
-      </body>
-    </html>
-  )
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return <html lang="en" dir="ltr" className={`dark ${geist.variable} ${arabic.variable}`} suppressHydrationWarning><body className="font-sans antialiased">{children}<Analytics/></body></html>
 }
