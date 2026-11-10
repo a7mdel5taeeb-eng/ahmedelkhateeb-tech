@@ -1,3 +1,67 @@
+<div align="center">
+
+![AHMED ELKHATEEB branded repository banner](docs/brand-banner.svg)
+
+# AHMED ELKHATEEB
+
+**Software Engineering · IT · AI Education**
+
+![Repository](https://img.shields.io/badge/Repository-Private-243d50?style=flat-square) ![Docs](https://img.shields.io/badge/Documentation-Updated-158caa?style=flat-square) ![Source](https://img.shields.io/badge/Source-GitHub-3b5366?style=flat-square)
+
+[**Repository overview ↗**](https://github.com/a7mdel5taeeb-eng/ahmedelkhateeb-tech) · [**Architecture ↓**](#-architecture-at-a-glance) · [**Project notes ↓**](#-original-project-documentation)
+
+</div>
+
+---
+
+## ✨ Overview · نبذة عن المشروع
+
+**Private portfolio project**
+
+The package.json identifies this project as ahmed-elkhateeb-portfolio. The older README's EinCode and Code Forge references appear to be leftover template text, so they should not be used as the project name.
+
+| | Focus area |
+|:--:|:--|
+| 🧭 | Professional identity |
+| 🧩 | Reusable components |
+| 🌐 | Next.js pages |
+| ⚙️ | Personal portfolio |
+
+**Core stack:** Next.js 16 · React 19 · TypeScript · Tailwind
+
+## 🧠 Architecture at a glance
+
+```mermaid
+flowchart LR
+    P0["Visitors"]
+    P1["Next.js App Router"]
+    P2["Portfolio interface"]
+    P0 --> P1
+    P1 --> P2
+    style P0 fill:#153f57,color:#fff,stroke:#4bcce9,stroke-width:2px
+```
+
+*Conceptual project map — not a claim of production deployment or complete infrastructure.*
+
+## 📂 Repository map
+
+`app/` · `components/` · `public/` · `styles/` · `package.json`
+
+## 🛡️ Working principles
+
+- Preserve existing working functionality and keep application changes separate from documentation updates.
+- Run the relevant project checks before merging application changes.
+- Do not commit credentials, private customer/school data, or local environment files.
+- Validate bilingual layouts, accessibility and mobile behavior where applicable.
+
+---
+
+## 📚 Original project documentation
+
+The established README content below is intentionally preserved, including the project's setup instructions, detailed notes, and historical checkpoints.
+
+---
+
 # EinCode
 
 A modern, minimal code editor / playground built with Next.js, React and Radix UI.
